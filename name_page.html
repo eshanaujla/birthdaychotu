@@ -1,0 +1,56 @@
+<html>
+
+<head>
+  <script src="transition.js" defer></script>
+
+    <title>Birthday Gift</title>
+    <link href="https://fonts.googleapis.com/css?family=Yeon+Sung&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css" href="pictures_page.html" >
+</head>
+
+<body background="name_page_background.jpg">
+    <center>
+        <h1 class="header">
+            Happy Birthday Chotu ╰(*°▽°*)╯
+    <br>
+        </h1>
+        <br>
+        <br>
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-11 login_div">
+            <div class="form-group">
+                <script>
+    function validateNameandRedirect() {
+      const inputName = document.getElementById("nameInput").value.trim();
+      const targetName = "sakshi"; 
+
+      if (inputName === targetName) {
+        window.location.href = "pictures_page.html"; 
+      } else {
+        alert("Access denied. Please enter the correct name. And in small charaters I only know so much code ghadi. ");
+      }
+    }
+    
+  </script>
+<h2>Enter your name to proceed:</h2>
+<h5>please type your correct name with correct spelling</h3>
+  <input type="text" id="nameInput" placeholder="Type your name here">
+
+            </div>
+            <button id="login_button" class="btn btn-primary" onclick="validateNameandRedirect()">Enter</button>
+  <div class="message" id="feedback"></div>
+
+</script>
+
+            <br><br>
+        </div>
+    </center>
+</body>
+
+</html>
+

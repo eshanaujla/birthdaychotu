@@ -1,0 +1,289 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background-size: cover;
+    background-color: lightblue;
+}
+
+.header {
+    color: black;
+    font-family: 'Yeon Sung';
+    font-size: 45px;
+    letter-spacing: 10px;
+    margin-top: 80px;
+}
+
+.header img {
+    width: 80px;
+    margin-left: -15px;
+}
+
+.login_div {
+    background: rgba(255, 255, 255, 0.8);
+    float: none;
+    border-radius: 15px;
+}
+
+.logo {
+    width: 80px;
+    margin-top: 30px;
+    border-radius: 40px;
+}
+
+#login_button {
+    width: 80%;
+    border-radius: 15px;
+}
+
+.room_name {
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#logout {
+    font-size: 20px;
+    float: right;
+}
+
+#output {
+    padding: 10px;
+    width: 80%;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+}
+
+.input_div_room_page {
+    width: 80%;
+}
+
+.input_div label {
+    color: white;
+    font-size: 20px;
+}
+
+.input_div_message_page {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.input_div_message_page label {
+    color: black;
+}
+
+.input_div_message_page #msg {
+    width: 80%;
+}
+
+.input_div_message_page button {
+    margin-top: 15px;
+    width: 50%;
+}
+
+.color_white {
+    color: white
+}
+
+.user_tick {
+    width: 20px;
+}
+
+.message_h4 {
+    padding-left: 5px;
+    color: grey;
+}
+.puzzle-container {
+  text-align: center;
+  padding: 40px;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #ffe6f0, #fff);
+}
+
+.drop-zone {
+  width: 300px;
+  height: 150px;
+  margin: 20px auto;
+  border: 3px dashed #ff6b81;
+  border-radius: 20px;
+  background: #fff0f5;
+  box-shadow: 0 0 20px #ff6b81;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #ff6b81;
+}
+
+.hearts img {
+  width: 80px;
+  margin: 10px;
+  cursor: grab;
+  transition: transform 0.3s ease;
+}
+
+.hearts img:hover {
+  transform: scale(1.2);
+}
+.fade-in {
+  animation: fadeIn 1s ease-out;
+}
+
+.fade-out {
+  animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at center, #fff0f5, #ffe6f0);
+  overflow-x: hidden;
+  padding: 5vh 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Headings & Text */
+h1 {
+  font-size: 6vw;
+  color: #ff6b81;
+  text-shadow: 0 0 20px rgba(255, 107, 129, 0.6);
+  margin-bottom: 3vh;
+}
+
+p, .letter-box {
+  font-size: 4vw;
+  color: #444;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  max-width: 90vw;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 3em;
+  }
+  p, .letter-box {
+    font-size: 1.6em;
+  }
+}
+
+/* Buttons */
+.top-right-button,
+.top-left-button {
+  position: fixed;
+  top: 2vh;
+  padding: 1vh 2vw;
+  font-size: 3vw;
+  background-color: #ff6b81;
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(255, 107, 129, 0.3);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  z-index: 20;
+}
+
+.top-right-button:hover,
+.top-left-button:hover {
+  background-color: #ff4757;
+  transform: scale(1.05);
+}
+
+.top-right-button {
+  right: 2vw;
+}
+
+.top-left-button {
+  left: 2vw;
+}
+
+/* Heart Glow */
+.heart-glow {
+  position: fixed;
+  width: 12vw;
+  height: 12vw;
+  background: url('heart.png') no-repeat center center;
+  background-size: contain;
+  animation: pulse 2s infinite ease-in-out;
+  top: 2vh;
+  right: 2vw;
+  z-index: 5;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+/* Confetti */
+.confetti {
+  position: absolute;
+  width: 1vw;
+  height: 1vw;
+  border-radius: 50%;
+  background-color: #ff6b81;
+  animation: confettiFall 3s linear forwards;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Fade In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,169 @@
+<html lang="en">
+  
+<head>
+  <meta charset="UTF-8">
+  <title>You’ve Reached the Heart 💝</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+  .top-left-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.top-left-button a {
+  background-color: #000000;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 1em;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.top-left-button a:hover {
+  background-color: #000000;
+  transform: scale(1.05);}
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at center, #fff0f5, #ffe6f0);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      animation: fadeIn 2s ease-out;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #ff6b81;
+      text-shadow: 0 0 20px rgba(255, 107, 129, 0.6);
+      margin-bottom: 20px;
+    }
+
+    .heart-glow {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: url('heart.png') no-repeat center center;
+      background-size: contain;
+      animation: pulse 2s infinite ease-in-out;
+      top: 20px;
+      right: 20px;
+      z-index: 5;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .letter-box {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.6em;
+      color: #444;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      border-left: 3px solid #ff6b81;
+      padding-left: 20px;
+      margin-top: 20px;
+      min-height: 200px;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #ff6b81;
+      animation: confettiFall 3s linear forwards;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="heart-glow"></div>
+
+  <h1>You’ve reached the heart of it all 💖</h1>
+
+  <div class="letter-box">
+    <p id="typed-letter"></p>
+  </div>
+
+  <script>
+    function launchConfetti() {
+      for (let i = 0; i < 120; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.top = '-20px';
+        confetti.style.backgroundColor = ['#ff6b81', '#ff4757', '#ffa07a'][Math.floor(Math.random() * 3)];
+        confetti.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 4000);
+      }
+    }
+
+    const message = `This is just the beginning.\nI love you.\n\nEvery puzzle piece, every sparkle, every moment on this site was crafted to remind you of how deeply you're cherished.\n\nYou are my favorite story, my brightest star, and the reason I believe in magic.\n\nThank you for being you.`;
+
+    let i = 0;
+    function typeLetter() {
+      if (i < message.length) {
+        document.getElementById("typed-letter").textContent += message.charAt(i);
+        i++;
+        setTimeout(typeLetter, message.charAt(i - 1) === '\n' ? 400 : 40);
+      }
+    }
+
+    window.onload = () => {
+      launchConfetti();
+      typeLetter();
+    };
+  </script>
+<div class="top-left-button">
+  <a href="pussles.html">Previous Page</a>
+</div>
+</body>
+</html>
+

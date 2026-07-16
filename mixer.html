@@ -1,0 +1,232 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emotion Mixer 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at center, #fff0f5, #ffe6f0);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 5vh 5vw;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #ff6b81;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #444;
+      margin-bottom: 2em;
+    }
+
+    .orb-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1em;
+      margin-bottom: 2em;
+    }
+
+    .orb {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ff6b81 0%, #ff4757 70%);
+      color: white;
+      font-size: 0.9em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      box-shadow: 0 0 15px rgba(255, 107, 129, 0.5);
+      transition: transform 0.3s ease;
+    }
+
+    .orb:hover {
+      transform: scale(1.1);
+    }
+
+    .mixer-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .mixer {
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, #ff6b81 0%, #ff4757 70%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      color: white;
+      box-shadow: 0 0 30px rgba(255, 107, 129, 0.6);
+      transition: transform 0.4s ease-in-out;
+    }
+
+    .grow-1 { transform: scale(1.3); }
+    .grow-2 { transform: scale(1.6); }
+    .grow-3 { transform: scale(2); }
+
+    .blend {
+      animation: blendEffect 1.2s ease-in-out;
+    }
+
+    @keyframes blendEffect {
+      0% { transform: scale(2) rotate(0deg); box-shadow: 0 0 30px #ff6b81; }
+      50% { transform: scale(2.3) rotate(8deg); box-shadow: 0 0 80px #ff4757; }
+      100% { transform: scale(2) rotate(0deg); box-shadow: 0 0 30px #ff6b81; }
+    }
+
+    .result-message {
+      font-size: 1.2em;
+      color: #ff6b81;
+      margin-top: 1em;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .result-message.show {
+      opacity: 1;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff6b81; }
+      to { text-shadow: 0 0 20px #ff4757; }
+    }
+
+    .reset-button {
+      margin-top: 2em;
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #ff6b81;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .reset-button:hover {
+      background-color: #ff4757;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Emotion Mixer 💖</h1>
+  <p>Drag 3 emotions into the heart to reveal your love potion...</p>
+
+  <div class="orb-container">
+    <div class="orb" draggable="true" ondragstart="drag(event)" id="Magic">💫 Magic</div>
+    <div class="orb" draggable="true" ondragstart="drag(event)" id="Joy">😂 Joy</div>
+    <div class="orb" draggable="true" ondragstart="drag(event)" id="Comfort">🧸 Comfort</div>
+    <div class="orb" draggable="true" ondragstart="drag(event)" id="Adventure">🗺️ Adventure</div>
+    <div class="orb" draggable="true" ondragstart="drag(event)" id="Love">💌 Love</div>
+    <div class="orb" draggable="true" ondragstart="drag(event)" id="Harmony">🎶 Harmony</div>
+  </div>
+
+  <div class="mixer-wrapper">
+    <div class="mixer" id="mixer" ondrop="drop(event)" ondragover="allowDrop(event)">💖</div>
+    <div class="result-message" id="result"></div>
+  </div>
+
+  <button class="reset-button" onclick="resetMixer()">Reset</button>
+
+  <script>
+    let selectedOrbs = [];
+
+    const potionMessages = {
+      "Adventure, Comfort, Harmony": "A potion of peace, warmth, and courage.",
+      "Adventure, Joy, Love": "A potion of thrill, delight, and affection.",
+      "Comfort, Joy, Magic": "A potion of coziness, laughter, and sparkle.",
+      "Joy, Love, Harmony": "A potion of laughter, love, and rhythm.",
+      "Magic, Love, Harmony": "A potion of passion, mystery, and melody.",
+      "Magic, Joy, Comfort": "A potion of wonder, laughter, and warmth.",
+      "Adventure, Magic, Joy": "A potion of curiosity, sparkle, and giggles.",
+      "Comfort, Love, Harmony": "A potion of softness, devotion, and serenity.",
+      "Adventure, Comfort, Magic": "A potion of wonder, warmth, and discovery.",
+      "Joy, Magic, Harmony": "A potion of rhythm, delight, and mystery.",
+      "Adventure, Joy, Harmony": "A potion of movement, laughter, and peace.",
+      "Comfort, Joy, Love": "A potion of hugs, giggles, and heartbeats.",
+      "Adventure, Love, Magic": "A potion of enchantment, passion, and exploration.",
+      "Comfort, Magic, Harmony": "A potion of mystery, comfort, and music.",
+      "Joy, Comfort, Harmony": "A potion of peace, play, and presence.",
+      "Adventure, Magic, Harmony": "A potion of mystery, music, and movement.",
+      "Magic, Joy, Love": "A potion of sparkles, affection, and delight.",
+      "Adventure, Comfort, Joy": "A potion of laughter, safety, and exploration.",
+      "Comfort, Love, Magic": "A potion of tenderness, enchantment, and devotion.",
+      "Love, Magic, Harmony": "A potion of devotion, wonder, and serenity."
+    };
+
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+      ev.preventDefault();
+      const data = ev.dataTransfer.getData("text");
+      const orb = document.getElementById(data);
+
+      if (!selectedOrbs.includes(data) && selectedOrbs.length < 3) {
+        selectedOrbs.push(data);
+        orb.style.visibility = "hidden";
+
+        const mixer = document.getElementById("mixer");
+        mixer.className = "mixer";
+        mixer.classList.add(`grow-${selectedOrbs.length}`);
+      }
+
+      if (selectedOrbs.length === 3) {
+        triggerBlendAnimation();
+      }
+    }
+
+    function triggerBlendAnimation() {
+      const mixer = document.getElementById("mixer");
+      mixer.classList.add("blend");
+
+      setTimeout(() => {
+        mixer.classList.remove("blend");
+        showResult();
+      }, 1200);
+    }
+
+    function showResult() {
+      const result = document.getElementById("result");
+      const combo = selectedOrbs.slice().sort().join(", ");
+      const message = potionMessages[combo] || `You chose ${selectedOrbs.join(", ")}. A rare and powerful blend!`;
+      result.textContent = message;
+      result.classList.add("show");
+    }
+
+    function resetMixer() {
+      selectedOrbs = [];
+      document.getElementById("result").textContent = "";
+      document.getElementById("result").classList.remove("show");
+      document.getElementById("mixer").className = "mixer";
+
+      const orbs = document.querySelectorAll(".orb");
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,258 @@
+<html lang="en">
+  
+<head>
+  <script src="transition.js" defer></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pictures of the years</title>
+  <link rel="stylesheet" href="transition.css">
+<script src="transition.js" defer></script>
+
+  <style>
+  body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+.slider-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 40px 0;
+}
+
+.slider {
+  position: relative;
+  width: 90%;
+  max-width: 1000px;
+  height: 70vh; /* Keeps slider within screen */
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background-color: #000; /* Optional: adds contrast behind images */
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  height: 100%;
+}
+
+.slide {
+  min-width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Shows full image without cropping */
+  display: block;
+}
+
+.caption {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  font-size: 1em;
+}
+
+.nav {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.nav button {
+  background-color: rgba(0,0,0,0.5);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1.2em;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.nav button:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #ecf0f1;
+  font-size: 0.9em;
+  width: 100%;
+}
+.top-right-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.top-right-button a {
+  background-color: #000000;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 1em;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.top-right-button a:hover {
+  background-color: #3a3333;
+  transform: scale(1.05);
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px rgba(0,0,0,0.3); }
+  50% { box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+  100% { box-shadow: 0 0 10px rgba(0,0,0,0.3); }
+}
+.top-left-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.top-left-button a {
+  background-color: #000000;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 1em;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.top-left-button a:hover {
+  background-color: #000000;
+  transform: scale(1.05);
+  
+}
+
+  </style>
+  <script>
+  function openCard() {
+    const card = document.querySelector('.card');
+    card.classList.toggle('opened');
+
+    const audio = document.getElementById('birthdayAudio');
+    audio.play();
+  }
+</script>
+
+</head>
+<body>
+
+  <header>
+    <h1>Pictures over the years</h1>
+  </header>
+
+  <div class="slider-container">
+    <div class="slider">
+      <div class="slides" id="slides">
+        <div class="slide">
+          <img src="first_image.jpg" alt="Image 1">
+          <div class="caption">The first image you sent after scolding me for not asking</div>
+        </div>
+        <div class="slide">
+          <img src="our_first_image.jpg" alt="Image 2">
+          <div class="caption">our first picture together</div>
+        </div>
+        <div class="slide">
+          <img src="cutie_rose_image.jpg" alt="Image 3">
+          <div class="caption">😁😁😁</div>
+        </div>
+        <div class="slide">
+          <img src="face_washing_image.jpg" alt="Image 4">
+          <div class="caption">😘😘😘😘😘😘</div>
+        </div>
+        <div class="slide">
+          <img src="Latest_image.jpg" alt="Image 5">
+          <div class="caption">The lastest one and shesshhhh</div>
+        </div>
+         <div class="slide">
+          <img src="Latest_kissing.jpg" alt="Image 5">
+          <div class="caption">No comments ☆*: .｡. o(≧▽≦)o .｡.:*☆</div>
+        </div>
+      </div>
+      <div class="nav">
+        <button onclick="prevSlide()">❮</button>
+        <button onclick="nextSlide()">❯</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentIndex = 0;
+    const slides = document.getElementById('slides');
+    const totalSlides = slides.children.length;
+
+    function showSlide(index) {
+      slides.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      showSlide(currentIndex);
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      showSlide(currentIndex);
+    }
+
+    setInterval(nextSlide, 5000);
+  </script>
+  <h1>Aren't you such a good girl😘😘</h1>
+
+<div class="top-right-button">
+  <a href="birthday_card.html">Next Page</a>
+</div>
+<div class="top-left-button">
+  <a href="name_page.html">Previous Page</a>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<html lang="en">
+  
+<head>
+  <script src="transition.js" defer></script>
+
+  <meta charset="UTF-8">
+  <title>Starry Surprise</title>
+  <link rel="stylesheet" href="transition.css">
+<script src="transition.js" defer></script>
+
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      overflow: hidden;
+      height: 100vh;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2em;
+      opacity: 0;
+      animation: fadeIn 3s ease-in-out 5s forwards;
+      text-align: center;
+      white-space: nowrap;
+    }
+.top-left-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.top-left-button a {
+  background-color: #000000;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 1em;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.top-left-button a:hover {
+  background-color: #000000;
+  transform: scale(1.05);
+  
+}
+.top-right-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.top-right-button a {
+  background-color: #000000;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 1em;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.top-right-button a:hover {
+  background-color: #3a3333;
+  transform: scale(1.05);
+}
+
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <div class="message"> I love you, Saakshi and thank you for everything❤️❤️❤️ now matter what I love you(RN😜😁). <br><br>
+    But all jokes aside its been the best 1 year of my life and the most sleepless one but talking to you is <br><br>
+   always worth it, whatever bad I say about you is a joke I love you a lot more than you can dream about and  <br><br>
+    more than  you is  most of all. There has not been one day that i wished that you don't call me or meet me and  <br><br>
+  this will be the  case whether you like it or not. But anyways thank so so so much for these 10 months and I  <br><br>
+  hope our relationship countinues like this and even gets better. Thank you sooo much!!! and <br><br> 
+   HAPPY BIRTHDAY LOVE!!! I am glad you are born my Diddu and no amount of compliments can ever describe <br><br> you ❤️❤️
+</div>
+
+  <script>
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    const stars = [];
+    const numStars = 200;
+
+    for (let i = 0; i < numStars; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.5,
+        alpha: Math.random(),
+        dx: (Math.random() - 0.5) * 0.5,
+        dy: (Math.random() - 0.5) * 0.5
+      });
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, width, height);
+      for (let star of stars) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+        ctx.fill();
+
+        star.x += star.dx;
+        star.y += star.dy;
+
+        if (star.x < 0 || star.x > width) star.dx *= -1;
+        if (star.y < 0 || star.y > height) star.dy *= -1;
+      }
+      requestAnimationFrame(drawStars);
+    }
+
+    drawStars();
+  </script>
+  <div class="top-right-button">
+  <a href="paraalax.html">Next Page</a>
+</div>
+<div class="top-left-button">
+  <a href="birthday_card.html">Previous Page</a>
+</div>
+<audio id="birthdayAudio" src="happy birthday - Made with Clipchamp.mp4" preload="auto" loop></audio>
+
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    const audio = document.getElementById("birthdayAudio");
+
+    // Try to play after user interaction (some browsers require it)
+    setTimeout(() => {
+      audio.play().catch(() => {
+        // If autoplay fails, wait for user interaction
+        document.body.addEventListener("click", () => {
+          audio.play();
+        }, { once: true });
+      });
+    }, 500); // slight delay to ensure audio is ready
+  });
+</script>
+
+</body>
+</html>

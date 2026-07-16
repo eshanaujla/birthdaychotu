@@ -1,0 +1,226 @@
+<html lang="en">
+  
+<head>
+  <script src="transition.js" defer></script>
+
+  <meta charset="UTF-8">
+  <title>Unlock the Surprise 💖</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    .top-left-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.top-left-button a {
+  background-color: #000000;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 1em;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.top-left-button a:hover {
+  background-color: #000000;
+  transform: scale(1.05);}
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #ffe6f0, #fff);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .puzzle-container {
+      text-align: center;
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      height: 600px;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 0 30px rgba(255, 107, 129, 0.3);
+      background-color: #fff0f5;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 2em;
+      color: #ff6b81;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #444;
+      margin-bottom: 30px;
+    }
+
+    .basket {
+      width: 200px;
+      height: 150px;
+      margin: 0 auto;
+      background: url('basket.png') no-repeat center center;
+      background-size: contain;
+      border: 3px dashed #ff6b81;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #ff6b81;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #ff6b81;
+    }
+
+    .hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .floating-heart {
+      width: 80px;
+      position: absolute;
+      cursor: grab;
+      pointer-events: auto;
+      transition: transform 0.3s ease;
+    }
+
+    .floating-heart:hover {
+      transform: scale(1.2);
+    }
+    .sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, #ff6b81 0%, transparent 70%);
+  border-radius: 50%;
+  animation: sparkleUp 1s ease-out forwards;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes sparkleUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.5);
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="puzzle-container">
+    <h2>Unlock the Surprise 💖</h2>
+    <p>Drag the 3 emoji into the basket to reveal your surprise...</p>
+    <h6>(It might seem like its already in the basket but its not so put it in and in exact spot or it might not work)</h6>
+
+    <div class="basket" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <img src="basket.jpeg">
+    </div>
+
+    <div class="hearts">
+      <img src="Heart-Heart-shaped-love-text-heart-png-min.png" draggable="true" ondragstart="drag(event)" id="heart1" class="floating-heart">
+      <img src="red-heart.png" draggable="true" ondragstart="drag(event)" id="heart2" class="floating-heart">
+      <img src="Simple-heart-symbol.png" draggable="true" ondragstart="drag(event)" id="heart3" class="floating-heart">
+    </div>
+  </div>
+
+  <script>
+    let droppedCount = 0;
+
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+      ev.preventDefault();
+      const data = ev.dataTransfer.getData("text");
+      const heart = document.getElementById(data);
+      if (!heart.classList.contains("dropped")) {
+        ev.target.appendChild(heart);
+        heart.classList.add("dropped");
+        heart.style.position = "static";
+        droppedCount++;
+      }
+
+      if (droppedCount === 4) {
+        setTimeout(() => {
+          alert("You unlocked the surprise! 💝");
+          window.location.href = "final.html"; // Replace with your final page
+        }, 1000);
+      }
+    }
+
+    // Randomize heart positions on load
+    window.onload = () => {
+      const hearts = document.querySelectorAll('.floating-heart');
+      hearts.forEach(heart => {
+        heart.style.top = Math.random() * 500 + 50 + 'px';
+        heart.style.left = Math.random() * 500 + 50 + 'px';
+      });
+    };
+    function triggerSparkles(x, y) {
+  const container = document.querySelector('.puzzle-container');
+  for (let i = 0; i < 10; i++) {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = (x + Math.random() * 40 - 20) + 'px';
+    sparkle.style.top = (y + Math.random() * 20 - 10) + 'px';
+    container.appendChild(sparkle);
+
+    setTimeout(() => sparkle.remove(), 1000);
+  }
+}
+function drop(ev) {
+  ev.preventDefault();
+  const data = ev.dataTransfer.getData("text");
+  const heart = document.getElementById(data);
+  if (!heart.classList.contains("dropped")) {
+    ev.target.appendChild(heart);
+    heart.classList.add("dropped");
+    heart.style.position = "static";
+    droppedCount++;
+
+    // ✨ Trigger sparkles at drop location
+    const rect = ev.target.getBoundingClientRect();
+    triggerSparkles(rect.left + rect.width / 2, rect.top + rect.height / 2);
+  }
+
+  if (droppedCount === 3) {
+    setTimeout(() => {
+      alert("You unlocked the surprise! 💝");
+      window.location.href = "final.html"; // Replace with your final page
+    }, 1000);
+  }
+}
+
+
+  </script>
+<div class="top-left-button">
+  <a href="paraalax.html">Previous Page</a>
+</div>
+</body>
+</html>
